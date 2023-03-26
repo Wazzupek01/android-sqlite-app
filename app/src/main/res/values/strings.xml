@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PhoneDB</string>
+    <string name="placeholder">placeholder</string>
+    <string name="clearRecords">Clear Records</string>
+    <string name="add_new_phone">Add new Phone</string>
+    <string name="brandLabel">Brand </string>
+    <string name="modelLabel">Model </string>
+    <string name="versionLabel">Android version </string>
+    <string name="urlLabel">Website </string>
+    <string name="cancelLabel">cancel</string>
+    <string name="saveLabel">save</string>
+</resources>

@@ -2,7 +2,6 @@ package com.pedrycz.phonedb.repositories;
 
 import android.app.Application;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.pedrycz.phonedb.DAO.PhoneDao;
@@ -12,8 +11,8 @@ import com.pedrycz.phonedb.entities.Phone;
 import java.util.List;
 
 public class PhoneRepository {
-    private PhoneDao dao;
-    private LiveData<List<Phone>> phones;
+    private final PhoneDao dao;
+    private final LiveData<List<Phone>> phones;
 
     public PhoneRepository(Application application) {
         PhoneDB phoneDB = PhoneDB.getDatabase(application);
@@ -36,9 +35,7 @@ public class PhoneRepository {
     public void deletePhone(Phone phone){ dao.deletePhone(phone);}
 
     public void deleteAll() {
-        PhoneDB.databaseWriteExecutor.execute(() -> {
-            dao.deleteAll();
-        });
+        PhoneDB.databaseWriteExecutor.execute(dao::deleteAll);
     }
 
     public int getDataCount(){

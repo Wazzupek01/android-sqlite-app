@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +16,7 @@ import java.util.List;
 public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.PhonesViewHolder> {
 
     private List<Phone> phones;
-    private LayoutInflater layoutInflater;
+    private final LayoutInflater layoutInflater;
     private static onItemClickListener onItemClickListener;
 
     public PhoneAdapter(Context context) {
@@ -27,7 +25,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.PhonesViewHo
     }
 
     public void setOnItemClickListener(PhoneAdapter.onItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+        PhoneAdapter.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -64,7 +62,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.PhonesViewHo
         void onItemClickListener(int position);
     }
 
-    class PhonesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class PhonesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView brand;
         private TextView model;
@@ -75,9 +73,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.PhonesViewHo
             brand = view.findViewById(R.id.brand);
             model = view.findViewById(R.id.model);
             version = view.findViewById(R.id.version);
-            view.setOnClickListener((view1) -> {
-                        com.pedrycz.phonedb.PhoneAdapter.onItemClickListener.onItemClickListener(getAdapterPosition());
-                    }
+            view.setOnClickListener((view1) -> PhoneAdapter.onItemClickListener.onItemClickListener(getAdapterPosition())
             );
         }
 

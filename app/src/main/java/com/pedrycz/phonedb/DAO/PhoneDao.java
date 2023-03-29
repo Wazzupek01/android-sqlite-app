@@ -4,20 +4,16 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import com.pedrycz.phonedb.entities.Phone;
 
 import java.util.List;
 
-import kotlin.jvm.JvmSuppressWildcards;
-
 @Dao
 public interface PhoneDao {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert
     void insert(Phone phone);
 
     @Delete

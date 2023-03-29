@@ -6,7 +6,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -18,13 +17,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pedrycz.phonedb.entities.Phone;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -79,9 +76,7 @@ public class MainActivity extends AppCompatActivity {
         });
         FloatingActionButton addPhoneButton = findViewById(R.id.addButton);
         addPhoneButton.setOnClickListener(view ->
-        {
-            addActivityResultLauncher.launch(addActivity);
-        });
+                addActivityResultLauncher.launch(addActivity));
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -101,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityResultLauncher<Intent> addUpdateResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
+            new ActivityResultCallback<>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
@@ -110,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
+                        assert data != null;
                         Bundle bundle = data.getExtras();
                         Executors.newSingleThreadExecutor().execute(() -> phoneViewModel.updatePhone(bundle.getLong("ID"),
                                 bundle.getString("BRAND"),
@@ -122,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityResultLauncher<Intent> addActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
+            new ActivityResultCallback<>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
@@ -131,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
+                        assert data != null;
                         Bundle bundle = data.getExtras();
                         Phone newPhone = new Phone(
                                 bundle.getString("BRAND"),
@@ -143,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-    Observer<List<Phone>> phoneListUpdateObserver = new Observer<List<Phone>>() {
+    Observer<List<Phone>> phoneListUpdateObserver = new Observer<>() {
         @Override
         public void onChanged(List<Phone> phones) {
             adapter.setPhones(phones);

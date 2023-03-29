@@ -11,7 +11,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.pedrycz.phonedb.DAO.PhoneDao;
 import com.pedrycz.phonedb.entities.Phone;
 
-import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -41,7 +40,7 @@ public abstract class PhoneDB extends RoomDatabase {
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    private static RoomDatabase.Callback phoneDatabaseCallback = new RoomDatabase.Callback(){
+    private static final RoomDatabase.Callback phoneDatabaseCallback = new RoomDatabase.Callback(){
 
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {

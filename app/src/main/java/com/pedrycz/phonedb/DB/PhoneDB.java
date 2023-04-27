@@ -53,8 +53,7 @@ public abstract class PhoneDB extends RoomDatabase {
                         new Phone("Huawei", "Mate 20 lite", "10", "https://www.mgsm.pl/pl/katalog/huawei/mate20lite/"),
                         new Phone("Nokia", "C12 PRO", "12 Go", "https://www.mgsm.pl/pl/katalog/nokia/c12pro/"),
                         new Phone("Sony", "Xperia J", "4.0 Ice Cream Sandwich", "https://www.mgsm.pl/pl/katalog/sony/xperiaj/"),
-                        new Phone("OnePlus", "Nord 2T 5G", "12", "https://www.gadgets360.com/oneplus-nord-2t-5g-price-in-india-106885"),
-                        new Phone("DUPA DUPA", "DUPA", "DUPA", "DUPA")
+                        new Phone("OnePlus", "Nord 2T 5G", "12", "https://www.gadgets360.com/oneplus-nord-2t-5g-price-in-india-106885")
                 );
                 for(Phone p: phones){
                     dao.insert(p);
